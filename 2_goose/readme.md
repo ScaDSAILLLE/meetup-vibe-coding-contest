@@ -1,112 +1,78 @@
 # Goose Desktop Installation & Setup Guide**
 
-**Goose Desktop** ist eine lokale, sichere und isolierte Entwicklungsumgebung für KI-gestützte Workflows.
+**Goose Desktop** ist eine lokale, KI-Agent(en) basierte Entwicklungsumgebung für KI-gestützte Workflows und Automation.
 Es kombiniert:
 
-* LLM-Anbindung (OpenAI, Anthropic, OpenAI-kompatibel)
-* isolierte Sandboxes für Codeausführung
-* Chat + Tools + Agenten
+* modellagnostische LLM-Anbindung (OpenAI, Anthropic, OpenAI-kompatibel, etc.)
+* bietet von Code-Vorschlägen über Code schreiben und ausführen, Fehler beheben bis hin zum koordinieren von Workflows sowie interagieren externer APIs zahlreiche nützliche Features 
+* Chat + Tools (MCP) + Agenten 
 
-Dieser Guide zeigt nur das **Nötigste für Installation, Setup und erste Tests**.
-Vertiefende Features werden unten verlinkt.
+Dieser Guide führt durch: \
+1. Installation 
+2. Konfiguration von OpenAI, Anthropic & OpenAI-kompatiblen Endpoints
+3. Erste Funktionstests (Chat, Quick-Edit, Model-Check)
 
 ---
 
 # **1. Installation**
 
+### **Offizielle Downloads**
+
 Die offiziellen Installationen stehen hier:
 ➡️ **[https://block.github.io/goose/docs/getting-started/installation/](https://block.github.io/goose/docs/getting-started/installation/)**
 
-### **1.1 Download Goose Desktop**
-
-Lade die passende Version herunter:
-
-* **macOS (.dmg)**
-* **Windows (.exe)**
-* **Linux (.AppImage)**
-
-Downloadseite (offizielle Docs):
-[https://block.github.io/goose/docs/getting-started/installation/](https://block.github.io/goose/docs/getting-started/installation/)
-
-### **1.2 Installation je OS**
-
-**macOS**
-
-1. `.dmg` öffnen
-2. Goose in „Applications“ ziehen
-3. Falls macOS fragt: *„App erlauben“* bestätigen
-
-**Windows**
-
-1. `.exe` starten
-2. Installer durchklicken
-3. Goose Desktop starten
-
-**Linux**
-
-```bash
-chmod +x GooseDesktop*.AppImage
-./GooseDesktop*.AppImage
-```
-
-Nach der Installation Goose öffnen → du siehst links *Chat*, *Agents*, *Files*, *Run*, *Settings*.
+Bitte die nötige OS-Plattform wählen und klassich den Installationsprozess durchspielen. \
+Weitere Informationen dazu findest du [hier](https://block.github.io/goose/docs/quickstart).
 
 ---
 
-# **2. LLM-Provider konfigurieren (nur das Nötigste)**
+# **2. LLM-Provider konfigurieren**
 
-Goose unterstützt standardmäßig drei Provider:
+Goose unterstützt zahlreiche Provider von den nahmhaften über Anbieter von Proxys (z.B. OpenRouter, die alle proprietären Modelle hinter ihrer API anbieten) bis hin zu lokal anzubindenden LLM-Backends (Ollama, LMStudio). Wir nutzen heute folgende: 
 
 * **OpenAI**
 * **Anthropic**
 * **OpenAI-compatible APIs**
-  (z. B. Ollama, LM Studio, lokale KI-Cluster wie KIARA)
+  (KIARA Cluster URZ, es gehten aber auch z. B. Ollama, LM Studio)
 
 Die Provider-Konfiguration findest du hier:
 ➡️ **[https://block.github.io/goose/docs/getting-started/providers/](https://block.github.io/goose/docs/getting-started/providers/)**
 
 In der App unter:
-**Settings → Providers**
+**Settings → *Models*-Tab → *Configure Providers* klicken**
 
 ---
 
 ## **2.1 OpenAI konfigurieren**
 
-1. API-Key eingeben
-   (Contest-Key aus der Cloud oder selbst erzeugt über [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys))
+1. API-Key eintragen\
+Findet ihr für den Vibe-Coding-Contest über den in den Slides geteilten Cloud-Link.
+Alternativ API-Key erstellen:
+   [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 
 2. In Goose:
-   **Settings → Providers → OpenAI**
+   **Settings → *Models*-Tab → *Configure Providers* klicken → *OpenAI* auswählen → API-Key eintragen**
 
-Eintragen:
+3. Weitere Einträge:
+   * API-Host `https://api.openai.com` und 
+   * Base Path `v1/chat/completions` sollten beide bereits eingetragen sein.
 
-| Feld     | Beispiel                                   |
-| -------- | ------------------------------------------ |
-| API Base | `https://api.openai.com/v1`                |
-| API Key  | `sk-...`                                   |
-| Model    | z. B. `gpt-4.1`, `gpt-4.1-mini`, `o3-mini` |
-
-**Verbindung mit „Test Connection“ prüfen.**
+Verfügbare Modelle werden dann automatisch erfragt und für den Chat angeboten. 
 
 ---
 
 ## **2.2 Anthropic (Claude) konfigurieren**
 
-1. API-Key eintragen
-   (Contest-Key oder: [https://console.anthropic.com/account/keys](https://console.anthropic.com/account/keys))
+1. API-Key eintragen\
+Findet ihr für den Vibe-Coding-Contest über den in den Slides geteilten Cloud-Link.
+Alternativ API-Key erstellen:
+   [https://console.anthropic.com/account/keys](https://console.anthropic.com/account/keys)
 
 2. In Goose:
-   **Settings → Providers → Anthropic**
+   **Settings → *Models*-Tab → *Configure Providers* klicken → *OpenAI* auswählen → API-Key eintragen**
 
-Eintragen:
-
-| Feld     | Beispiel                                                       |
-| -------- | -------------------------------------------------------------- |
-| API Base | `https://api.anthropic.com/v1/messages` *(Standard laut Docs)* |
-| API Key  | `sk-ant-...`                                                   |
-| Model    | `claude-3-sonnet`, `claude-3-opus`, `claude-3-haiku`           |
-
-**„Test Connection“ klicken.**
+3. Weitere Einträge:
+   * API-Host `https://api.anthropic.com` sollte bereits eingetragen sein.
 
 ---
 
@@ -119,59 +85,30 @@ Doku:
 
 ---
 
-### **Beispiel 1: KIARA Cluster URZ (vLLM)**
+### **KIARA Cluster URZ (vLLM)**
 
-| Feld     | Eintrag                                       |
-| -------- | --------------------------------------------- |
-| API Base | `https://kiara.sc.uni-leipzig.de/api`         |
-| API Key  | Contest-Cloud                                 |
-| Model    | z. B. `vllm-meta-llama-llama3-3-70b-instruct` |
+1. API-Key eintragen\
+Findet ihr für den Vibe-Coding-Contest über den in den Slides geteilten Cloud-Link.
 
-„Test Connection“ → sollte sofort grün werden.
+2. In Goose:
+   **Settings → *Models*-Tab → *Configure Providers* klicken → *Add custom provider* auswählen**
 
----
-
-### **Beispiel 2: Ollama (lokal)**
-
-1. Installieren: [https://ollama.com](https://ollama.com)
-2. Modell verfügbar machen:
-
-   ```bash
-   ollama run llama3
-   ```
-3. Goose:
-
-| Feld     | Eintrag                     |
-| -------- | --------------------------- |
-| API Base | `http://localhost:11434/v1` |
-| API Key  | beliebig („ollama“)         |
-| Model    | `llama3`                    |
-
----
-
-### **Beispiel 3: LM Studio**
-
-1. LM Studio starten
-2. „OpenAI-compatible API Server“ aktivieren
-3. Goose:
-
-| Feld     | Eintrag                          |
-| -------- | -------------------------------- |
-| API Base | z. B. `http://localhost:1234/v1` |
-| Model    | Auswahl aus LM Studio            |
+3. Weitere Einträge:
+   * Provider Type: *OpenAI Compatible* auswählen
+   * Display Name: KIARA
+   * API-URL `https://kiara.sc.uni-leipzig.de/api`
+   * API-KEY eintragen
+   * Modell(e) eintragen (komma-separiert, falls mehrere eingetragen werden sollen); wir nutzen heute: `vllm-meta-llama-llama-3-3-70b-instruct`
+   * *Create Provider* klicken
 
 ---
 
 # **3. Erste Tests**
 
-Analog zu deiner Void-README – minimal, aber funktional.
-
----
-
-## **Test 1: Chat**
+## **Test: Chat / LLM-Provider erreichbar**
 
 1. Links „Chat“ öffnen
-2. Provider auswählen (OpenAI / Anthropic / KIARA / lokal)
+2. Falls  nötig unten bei der Texteingabe vom Chat Provider auswählen (OpenAI / Anthropic / KIARA / lokal) oder unter **Settings → *Models*-Tab** (s. oben)
 3. Nachricht senden:
 
 > „Hallo Goose! Funktionierst du?“
@@ -180,53 +117,7 @@ Wenn eine Antwort kommt → Modell funktioniert.
 
 ---
 
-## **Test 2: Code-Ausführung**
-
-1. Links „Run“ oder „Sandbox“ öffnen
-2. Code eingeben:
-
-```python
-print("Hello from Goose Desktop!")
-```
-
-3. „Run“ klicken
-
-→ Ausgabe erscheint im unteren Fenster.
-
----
-
-## **Test 3: Einfacher Agent-Workflow**
-
-1. Links „Agents“ öffnen
-2. „Default Agent“ oder eigenen erstellen
-3. Prompt:
-
-> „Erstelle drei Projektideen für ein Micro-SaaS.“
-
-Wenn Goose mehrere Schritte ausführt → Agenten funktionieren.
-
----
-
-# **4. Troubleshooting**
-
-### **„401 Unauthorized“**
-
-→ Falscher API-Key
-→ Falscher Endpoint (Achtung: muss `/v1` haben)
-
-### **„Model not found“**
-
-→ Modellname exakt prüfen
-→ Bei Ollama Modell vorher „ziehen“
-
-### **Keine Antwort**
-
-→ Netzwerkblocker / Firewall
-→ LM Studio/Ollama/vLLM nicht gestartet
-
----
-
-# **5. Weiterführende Features (für Fortgeschrittene)**
+# **4. Weiterführende Features (für Fortgeschrittene)**
 
 Goose bietet viele leistungsstarke Funktionen, die über den Grund-Setup hinausgehen:
 
@@ -235,11 +126,29 @@ Goose bietet viele leistungsstarke Funktionen, die über den Grund-Setup hinausg
 
 Empfohlen für Contest-Teilnehmende:
 
-* **Sessions** – persistente Arbeitskontexte
+* **Multi-Sessions** – persistente Arbeitskontexte über diverse Chats (Stichwort *Sub-Agents*)
 * **Recipes** – wiederverwendbare automatisierte Abläufe
 * **Scheduler** – zeit- oder eventbasierte Agent-Runs
 * **Tools** – Dateisystem, Python, Bash, Browser, Custom Tools
-* **Agents** – komplexe Multi-Step Reasoning Workflows
-* **Sandboxes** – isolierte sichere Coding-Umgebungen
+* **Extensions** – diverse Integrationen / Anbindungen via MCP (Model Context Protocol)
 
 Diese Features erlauben echtes **Vibe Coding mit autonomen Agenten**.
+
+# **5. Troubleshooting**
+
+### **„401 Unauthorized“**
+
+→ Falscher API-Key
+→ Falscher Endpoint 
+
+### **„Model not found“**
+
+→ Modellname exakt prüfen
+
+### **Keine Antwort**
+
+→ Netzwerkblocker / Firewall
+→ ggf. timeout?
+→ LMStudio/Ollama/vLLM nicht gestartet
+
+---
