@@ -54,7 +54,7 @@ Während des Workshops arbeiten wir primär mit **VOID** und **Goose**, zwei AI-
 
 ## **VOID**
 
-➡️ **Ordner im Repo:** [`/1_void`](./1_void)
+➡️ **Ordner im Repo:** [`/1_void`](./1_void)\
 ➡️ **Offizielle Website:** [https://voideditor.com/](https://voideditor.com/)
 
 VOID ist ein **Open-Source AI-Code-Editor**, basierend auf VS Code und ähnlich Cursor, nur eben free. 
@@ -70,7 +70,7 @@ Kurz zusammengefasst:
 
 ## **Goose**
 
-➡️ **Ordner im Repo:** [`/2_goose`](./2_goose)
+➡️ **Ordner im Repo:** [`/2_goose`](./2_goose)\
 ➡️ **Offizielle Docs:** [https://block.github.io/goose/](https://block.github.io/goose/)
 
 Goose ist ein:
