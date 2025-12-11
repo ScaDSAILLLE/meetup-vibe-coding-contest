@@ -247,7 +247,7 @@ VOID ist noch jung — Entwicklung ist aktuell für Feature-Brainstorming pausie
   [https://github.com/voideditor/void](https://github.com/voideditor/void)
 
 * **Video: Einführung in VOID**
-  *[https://youtu.be/PLACEHOLDER](https://youtu.be/PLACEHOLDER)* *(Platzhalter – kann ersetzt werden)*
+  *[Youtube](https://www.youtube.com/watch?v=nBWONO1Nnsw))* 
 
 
 ---
