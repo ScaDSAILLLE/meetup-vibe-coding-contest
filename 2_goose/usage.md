@@ -43,12 +43,13 @@ Hier interagierst du mit dem Modell — ähnlich wie in VOID, aber erweitert um:
 
 * Session-Kontext
 * Tools
-* Python-Sandbox
 * Multi-Agent-Workflows
+* Arbeitsordner
+* Aktuell aktives Modell (hier *Devstral* von Mistral)
 
 ### **📜 History**
 
-Chronologische Liste deiner Chat-Sitzungen.
+Chronologische Liste/Grid deiner Chat-Sitzungen.
 
 ### **🧪 Recipes**
 
@@ -56,13 +57,13 @@ Automatisierte Workflows, die du selbst bauen oder importieren kannst.
 
 Beispiele:
 
-* „Fasse mein Projekt zusammen“
-* „Baue automatisch Dokumentation aus Code“
-* „Erzeuge CSV-Berichte“
+* „Erstelle ein Python Projekt immer mit eigenem Projektordner, lege ein virtual-environment an, bspw. mit uv und führe uv init aus. Prüfe abschließend vor Beginn des Projekts, ob\
+alles sauber eingerichtet wurde, die `.venv` aktiviert ist und ebenso eine pyproject.toml das Setup dokumentiert. Kläre den Nutzer über die Verwendung von uv auf und die nötigsten\
+Befehle, um ein Python Projekt mit uv sauber zu managen.
 
 ### **⏱️ Scheduler**
 
-Lässt Recipes zeitgesteuert oder eventbasiert ausführen.
+Lässt Abläufe und konfigurierte Tasks (z.B. via `.yaml`) zeitgesteuert oder eventbasiert ausführen.
 
 ### **🧩 Extensions**
 
@@ -72,11 +73,11 @@ Zukünftige Erweiterungen, Tools, Agent-Packs.
 
 Hier richtest du:
 
-* Modelle
-* API-Keys
-* Tools
-* File-System-Zugriff
-* Sandbox-Einstellungen
+* Modelle und deren Anbindung
+* Chat - zahllose Einstellungen dazu, wie du mit Goose interagierst und z.B. Erklärungen zu den verschiedenen Modi
+* Sessions-Einstellungen zum Teilen von Arbeiten in Goose mit anderen
+* App-Settings für bspw. das Erscheinungsbild der App
+* uvm.
   ein.
 
 ---
@@ -87,7 +88,7 @@ Hier spielt sich alles ab:
 
 * Oben: Session-Titel, Modell-Auswahl
 * Mitte: Chat-Verlauf
-* Unten: Eingabefeld + File-Attach + Tool-Selector
+* Unten: Eingabefeld + File-Attach + Modell-/Tool-Selector
 
 Die Oberfläche ist bewusst minimal, damit du dich auf die Interaktion mit der AI konzentrieren kannst.
 
@@ -98,7 +99,7 @@ Die Oberfläche ist bewusst minimal, damit du dich auf die Interaktion mit der A
 Ganz unten rechts findest du:
 
 * **Modell-Selector**
-* **Modus-Auswahl** (z. B. Chat only / Tools / Sandbox)
+* **Modus-Auswahl** (z. B. Chat only / Smart / Manual / Autonomous)
 * **Tokenverbrauch**
 * **Status-LED** (grün = verbunden)
 
@@ -106,45 +107,46 @@ Ganz unten rechts findest du:
 
 # 🧠 **2. Modelle einrichten & empfehlen**
 
-Die vollständige Provider-Konfiguration findest du im `/goose/README.md`.
+Die vollständige Provider-Konfiguration findest du im `/goose/readme.md`.
 Hier eine kurze Übersicht der **empfohlenen Modelle für den Contest**:
 
 ---
 
-## 🦙 **KIARA Cluster (Uni Leipzig URZ)**
+## 🦙 **KIARA (Uni Leipzig URZ Cluster)**
 
 **Modell:**
-`vllm-meta-llamna-llama-3-3-70b-instruct`
+`vllm-meta-llama-llama-3-3-70b-instruct`
+**Vorteile:**
 
-Vorteile:
-
-* sehr gute Coding-Performance
-* kostenlos
-* hohe Kontextlänge
-* ideal für Einsteiger
+* gute Coding-Qualität
+* schnell
+* läuft *"on-prem"*, ist also *"kostenlos"*
+* ausreichendes Modell für die meisten Tasks
+* ideal, wenn wir die Rate-Limits ausreizen
 
 ---
 
-## 🔧 **Mistral – devstral-2512** *(kostenlos)*
+## 🛠️ **Mistral – devstral-2512**
 
-Perfekt für:
+**Status:** derzeit kostenlos, da neuer Model-Launch (09.12.2025)
+**Vorteile:**
 
-* Refactoring
-* schnelle Code-Interpretation
-* Python & Webentwicklung
+* aktuell sehr starkes (kleines) Coding Modell 
+* neueste Coding-Skills
+* schlägt aktuell auch große Modelle, laut Benchmarks
 
 ---
 
 ## 🧠 **OpenAI – gpt-4.1**
 
-**input:** $3/MTok
-**output:** $12/MTok
+**input**: $3/MTok
+**output**: $12/MTok
 
-Vorteile:
+**Vorteile:**
 
-* sehr gute Multi-Step-Fähigkeiten
-* ideal für komplexe Code-Generierung
-* stabil
+* gute Codequalität
+* gut im Multi-Step-Reasoning
+* auch geeignet für komplexe Aufgaben
 
 [Pricing](https://openai.com/de-DE/api/pricing/)
 
@@ -152,14 +154,15 @@ Vorteile:
 
 ## 🤖 **Anthropic – claude-sonnet-4-0**
 
-**input:** $3/MTok
-**output:** $15/MTok
+**input**: $3/MTok
+**output**: $15/MTok
 
-Vorteile:
+**Vorteile:**
 
-* extrem gut im Erklären
-* stark in Projekt-Analyse
-* ideal für Refactoring & Architekturfragen
+* Top im Verständnis großer Projekte
+* Sehr stark beim Erklären & Strukturieren
+* Gut für Agent-basiertes Coding
+* Nach wie vor *"das beste"* Coding Modell
 
 [Pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 
@@ -194,18 +197,18 @@ Beispiel:
 
 ## **3.3 Python Sandbox (Tool-Use)**
 
-Goose kann Python-Code lokal in einer sicheren Umgebung ausführen.
+Goose kann Python-Code lokal in einer eigenen (sicheren) Umgebung bzw. Laufzeit ausführen.
 
 Im Chat:
 
-> „Erzeuge eine neue Datei `calc.py` und schreibe eine Funktion, die Statistiken berechnet. Führe sie aus.“
+> „Erzeuge eine neue Datei `calc.py` und schreibe eine Funktion, die Grunrechenarten (+, -, *, /) an Beispielen berechnet. Führe sie aus.“
 
 Goose wird:
 
 1. Datei erzeugen
 2. Code einfügen
-3. Sandbox öffnen
-4. Ergebnis anzeigen
+3. Laufzeit starten / ggf. eigene virtuelle Python Umgebung aufsetzen (s. Recipes)
+4. Code ausführen & Ergebnis anzeigen
 
 ---
 
@@ -213,9 +216,12 @@ Goose wird:
 
 Goose kann intern mit mehreren Agenten arbeiten (z. B. Analyzer, Builder, Tester).
 
-Beispiel:
+Beispiel in 3 Chats:
 
-> „Erstelle bitte einen kleinen HTML/JS Color Picker und zeige mir die Struktur und die Dateien.“
+> „Du bist ein Planner Subagent: Erstelle bitte einen Projektplan für einen kleinen HTML/JS/CSS Color Picker und zeige mir die Struktur und die nötigen Dateien.\
+Bereite das entsprechend für weitere Subagenten auf!“
+> "Du bist ein HTML/JS/CSS Builder Subagent, nimmst den Plan vom Planner Subagent für die Color Picker App entgegen und entgegen und arbeitest den Code aus."
+> "Du bist ein Tester Subagent, nimmst den Code vom Builder Subagenten entgegen, liest, prüfst und testest diesen und zeigst das Ergebnis an."
 
 ---
 
@@ -234,14 +240,14 @@ Beispiele:
 
 ## **3.6 Scheduler (optional, aber cool!)**
 
-Du kannst Recipes zeitgesteuert laufen lassen.
+Du kannst Abläufe und Tasks zeitgesteuert laufen lassen.
 
 Beispiele:
 
 * „Analysiere dieses Repo jeden Morgen um 9 Uhr.“
 * „Führe dieses ETL-Script stündlich aus.“
 
-Für den Workshop: optional, aber ein tolles Fortgeschrittenen-Feature.
+Für den Workshop: optional, aber ein tolles Fortgeschrittenen-Feature, wer Lust hat sich reinzufuchsen, gerne testen!
 
 ---
 
@@ -255,29 +261,22 @@ Damit Teilnehmer *sofort* loslegen können:
 
 > „Erstelle eine Datei `game.py` mit einer TicTacToe-Klasse.“
 
-> „Refaktoriere die Klasse so, dass sie objektorientierter wirkt.“
+> „Baue mir eine persönliche Website. Ich bin ...“
 
 ---
 
 ### **B) Kleine App-Prototypen**
 
-> „Erstelle eine einfache HTML/JS Webapp, die eine Farbe auswählt und das Ergebnis anzeigt.“
+> „Erstelle eine einfache HTML/JS/CSS Webapp, die eine Farbe auswählt und das Ergebnis anzeigt.“
+
+
+### **C) Projektzusammenfassung**
+
+> „Lies alle Dateien ein und gib mir eine Projektübersicht.“ *Achtung: nur bei bereits vorhandenen Projekten!*
 
 ---
 
-### **C) Sandbox-Tests**
-
-> „Erstelle eine Datei `math_utils.py` und teste sie in der Sandbox mit zufälligen Eingaben.“
-
----
-
-### **D) Projektzusammenfassung**
-
-> „Lies alle Dateien ein und gib mir eine Projektübersicht.“
-
----
-
-# 📚 **5. Weiterführende Funktionen (für Fortgeschrittene)**
+# 📚 **5. Weiterführende Funktionen (für Fortgeschrittene)** *...eher für nach dem Meetup!*
 
 Diese Features sind extrem mächtig – ideal nach den ersten Erfolgen:
 
@@ -304,9 +303,11 @@ Doku dazu:
 # 📝 **6. Tipps für erfolgreiches Vibe Coding in Goose**
 
 * Arbeite **inkrementell** – kleine Prompts → gute Ergebnisse
-* Nutze **Python Sandbox**, um Code schnell zu testen
+* Beschreibe dich zu deiner Lösung
+* Nutze **Goose** eigens zum testen, um Code schnell zu testen
 * Frage die KI bewusst nach *Verbesserungen & Alternativen*
-* Nutze **File-Attach**, wenn du Code analysieren lässt
-* Speichere Workflows als **Recipes**, wenn du sie wieder brauchst
+* Nutze **File-Attach**, wenn du Code analysieren lässt oder gar Zeichnungen/Bilder deines Nutzerinferfaces hast- das hilft ggf. schneller zur Lösung und näher\
+an deine Vorstellung zu kommen, als es minutiös doch trotzdem vage in Worten zu beschreiben.
+* Speichere Workflows als **Recipes**, wenn du sie wieder brauchst, so gewöhnst du dir gleich "best practices" an und sparst dir Zeit/Aufwand
 
 ---

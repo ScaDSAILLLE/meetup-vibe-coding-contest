@@ -120,6 +120,8 @@ tba
 5. Bereitet eine kleine Präsentation vor (Vorlage liegt im Repo).
 6. Spaß haben, etwas lernen — und die Rate Limits testen. 😉
 
+Achtung: Behaltet Kontext / Tokenverbrauch und Rate Limits im Auge. 
+
 ---
 
 # 🔑 **API Keys & Ressourcen**

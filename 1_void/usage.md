@@ -64,12 +64,12 @@ Die Modell-Picker befinden sich direkt über dem Texteingabefeld.
 
 ---
 
-## **4. Statusleiste (unten)**
+## **4. Statusleiste (unten; für uns heute eher irrelevant)**
 
 Hier siehst du:
 
 * aktive Branches
-* Linter & Interpreter
+* Linter & Interpreter (vllt. mal eine KI fragen, was das ist ;-)) 
 * Hinweis, ob VOID die KI erfolgreich erreicht
 * Fehlermeldungen (z. B. rate limit / kein API-Key)
 
@@ -93,13 +93,15 @@ Menü → *View → Open View → Chat*
 
 Dann:
 
-> „Hallo, kannst du mir erklären, was in dieser Datei passiert?“
+> „Hallo, kannst du mir erklären, was Python ist?“
+> „Hallo, kannst du mir erklären, was in dieser Datei passiert?“ (sofern schon Dateien vorhanden im geöffneten Projektordner; Gather-Mode nutzen!)
+> "Was brauche ich für eine simple Webseite oder Web-App?
 
-Wenn die KI antwortet → Setup funktioniert.
+Wenn die KI antwortet → Setup funktioniert. Los geht's!
 
 ---
 
-## **2.2 Quick Edit (Inline Edit)**
+## **2.2 Quick Edit (Inline Edit): *Falls ihr bereits Code habt!***
 
 Markiere Code (z. B. in `hello_world.py`):
 
@@ -120,9 +122,27 @@ Beispiel-Prompt:
 
 VOID ersetzt nun direkt die markierte Stelle.
 
+## **2.3 Chat-Modus**
+
+Im Dropdown rechts oben im Chatview → *Chat* wählen.
+
+Im Chat kannst du:
+
+* Ideen brainstormen und entwickeln
+* Projekte und deren Umsetzung planen
+* Kontext zusammen mit einem KI-Modell zu deinem Projekt entwickeln, so dass bessere Ergebnisse zu erwarten sind (Stichwort: *"Prompt-Engineering od. Kontext-Engineering"*) 
+* Code reorganisieren
+* Einfach chatten oder dir Code erklären lassen
+
+Achtung: der Kontext kann auch zu umfangreich werden, so dass das Modell nicht mehr alles überblickt UND die Kosten pro Abfrage steigen(!)
+
+Beispiel:
+
+> „Was ist Python und welches Einsteigerprojekt könnte ich gemeinsam mit dir entwickeln, so dass ich Python-Grundlagen und best practices lerne?“
+
 ---
 
-## **2.3 Agent-Modus**
+## **2.4 Agent-Modus**
 
 Im Dropdown rechts oben → *Agent* wählen.
 
@@ -139,7 +159,7 @@ Beispiel:
 
 ---
 
-## **2.4 Gather-Modus**
+## **2.5 Gather-Modus**
 
 Gather liest das Projekt ein.
 
@@ -167,21 +187,22 @@ Diese Modelle funktionieren erfahrungsgemäß *sehr gut* in VOID und sind ideal 
 `vllm-meta-llama-llama-3-3-70b-instruct`
 **Vorteile:**
 
-* sehr gute Coding-Qualität
+* gute Coding-Qualität
 * schnell
-* kostenlos nutzbar
-* ideal für Einsteiger
+* läuft *"on-prem"*, ist also *"kostenlos"*
+* ausreichendes Modell für die meisten Tasks
+* ideal, wenn wir die Rate-Limits ausreizen
 
 ---
 
 ## 🛠️ **Mistral – devstral-2512**
 
-**Status:** kostenlos
+**Status:** derzeit kostenlos, da neuer Model-Launch (09.12.2025)
 **Vorteile:**
 
-* sehr stark beim Refactoring
-* moderne Coding-Skills
-* gut für Webentwicklung & JS
+* aktuell sehr starkes (kleines) Coding Modell 
+* neueste Coding-Skills
+* schlägt aktuell auch große Modelle, laut Benchmarks
 
 ---
 
@@ -192,9 +213,9 @@ Diese Modelle funktionieren erfahrungsgemäß *sehr gut* in VOID und sind ideal 
 
 **Vorteile:**
 
-* hervorragende Codequalität
+* gute Codequalität
 * gut im Multi-Step-Reasoning
-* ideal für komplexe Aufgaben
+* auch geeignet für komplexe Aufgaben
 
 [Pricing](https://openai.com/de-DE/api/pricing/)
 
@@ -210,6 +231,7 @@ Diese Modelle funktionieren erfahrungsgemäß *sehr gut* in VOID und sind ideal 
 * Top im Verständnis großer Projekte
 * Sehr stark beim Erklären & Strukturieren
 * Gut für Agent-basiertes Coding
+* Nach wie vor *"das beste"* Coding Modell
 
 [Pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 
@@ -217,16 +239,16 @@ Diese Modelle funktionieren erfahrungsgemäß *sehr gut* in VOID und sind ideal 
 
 # 📂 **4. Weitere VOID Ressourcen**
 
-VOID ist noch jung — die Dokumentation wächst. Hier findest du das Wichtigste:
+VOID ist noch jung — Entwicklung ist aktuell für Feature-Brainstorming pausiert. Hier findest du das Wichtigste:
 
 * **VOID Docs (Overview):**
-  *[https://voideditor.com/docs](https://voideditor.com/docs)* *(Platzhalter – bitte später ersetzen)*
+
+* **GitHub Repo**
+  [https://github.com/voideditor/void](https://github.com/voideditor/void)
 
 * **Video: Einführung in VOID**
   *[https://youtu.be/PLACEHOLDER](https://youtu.be/PLACEHOLDER)* *(Platzhalter – kann ersetzt werden)*
 
-* **GitHub Repo**
-  [https://github.com/voideditor/void](https://github.com/voideditor/void)
 
 ---
 
@@ -234,11 +256,12 @@ VOID ist noch jung — die Dokumentation wächst. Hier findest du das Wichtigste
 
 ### **A) Neue Datei generieren lassen**
 
-> „Erstelle mir eine Datei `utils.py` und füge eine Funktion `calculate_stats()` ein, die aus einer Liste Mittelwert & Median berechnet.“
+> „Erstelle mir eine Datei `utils.py`, die aus einer Liste (im Code) Mittelwert & Median berechnet.\
+Beachte best-pracitces, lege falls nötig einen Projektordner sowie ein virtual environment für das Projekt an."
 
 ### **B) UI-Template generieren (Web)**
 
-> „Erstelle mir eine einfache HTML+JS App mit einem Button, der ein zufälliges Meme anzeigt.“
+> „Erstelle mir eine einfache HTML+JS+CSS App mit einem Button, der ein zufälliges Meme anzeigt.“
 
 ### **C) Python-Projekt analysieren**
 
@@ -246,7 +269,7 @@ VOID ist noch jung — die Dokumentation wächst. Hier findest du das Wichtigste
 
 ### **D) Fehler finden**
 
-> „In `main.py` gibt es einen Bug – finde und behebe ihn bitte.“
+> „In `main.py` gibt es einen Bug – finde und behebe ihn bitte.“ Achtung: nur sinnvoll, wenn eine `main.py` vorhanden ist; im Zweifel vibe-code dir eine! :)
 
 ---
 
@@ -255,7 +278,7 @@ VOID ist noch jung — die Dokumentation wächst. Hier findest du das Wichtigste
 * **Arbeite iterativ** – kleine Schritte erzeugen bessere Ergebnisse.
 * **Nutze Quick Edit großzügig** – es ist eines der mächtigsten Features.
 * **Wechsle zwischen Chat, Gather und Agent-Modus** je nach Ziel.
-* **Zeige der KI Beispiele** – sie lernt deinen Stil schnell.
-* **Setze das Modell bewusst** – stärkere Modelle für komplexe Aufgaben.
+* **Zeige der KI Beispiele** – sie adaptiert deinen Stil schnell.
+* **Setze das Modell bewusst** – stärkere Modelle für komplexe Aufgaben, wenn's mal hakt oder ihr euch im Kreis dreht.
 
 ---
