@@ -105,9 +105,9 @@ Varianten:
 Ein interaktives Web-Instrument (JS + HTML + Audio).
 Perfekt für UI-Events und KI-unterstützte Erweiterungen.
 
-### **Beispiel 3 – *
+### **Beispiel 3 – Voting App für die Contest-Siegerabstimmung*
 
-tba
+Baue eine Voting App für den heutigen Contest, um am Ende (interaktiv) die Sieger zu küren.
 
 ---
 
