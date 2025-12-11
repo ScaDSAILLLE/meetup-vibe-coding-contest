@@ -131,7 +131,7 @@ Die für das Meetup vorgesehenen API Keys findet ihr unter dem in den Slides ang
 Empfohlen werden folgende Modelle:
 
 * KIARA: *vllm-meta-llamna-llama-3-3-70b-instruct* ((URZ) Uni-Rechenzentrum-gehostetes LLM-CLuster, **free**)
-* Mistral: *devstraö-2512* (neuestes Coding-LLM von Mistral! Derzeit ebenfalls **free**)
+* Mistral: *devstral-2512* (neuestes Coding-LLM von Mistral! Derzeit ebenfalls **free**, 12/2025)
 * OpenAI: *gpt-4.1* (API-Key vorkonfiguriert oder per Cloud-Link zu bekommen; FYI: input: $3/MTok; output: $12/MTok) [Pricing](https://openai.com/de-DE/api/pricing/)
 * Anthropic: *claude-sonnet-4-0* (API-Key vorkonfiguriert oder per Cloud-Link zu bekommen; FYI: input: $3/MTok; output: $15/MTok) [Pricing](https://platform.claude.com/docs/en/about-claude/pricing)
 
