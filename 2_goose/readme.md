@@ -1,4 +1,4 @@
-# Goose Desktop Installation & Setup Guide**
+# Goose Desktop Installation & Setup Guide
 
 **Goose Desktop** ist eine lokale, KI-Agent(en) basierte Entwicklungsumgebung für KI-gestützte Workflows und Automation.
 Es kombiniert:
